@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="application/json" >
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pagina de prueba</title>
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <h1 > Hola Mundo </h1> 
+    <h2 > Hola Mundo </h2> 
+    <h3 > Hola Mundo </h3> 
+    <h4 > Hola Mundo </h4> 
+</body>
+</html>
+<script>
+$.ajax({
+
+                      dataType: 'json',
+                      data:{
+                        id:39,
+                        name:"Juan",
+                        email:"email",
+                        age:34
+                      },
+                     url:"https://g533ded53dca5a3-db202107191810.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/client/client",
+                      type:'POST',
+                      success:function(response) {
+                      		
+	                      console.log(response);
+                      },
+                      error: function(jqXHR, textStatus, errorThrown) {
+                               //location.reload();
+                               //alert("Insertado el pago");
+                           }
+  });
+</script>
