@@ -1,7 +1,6 @@
 function traerInformacion(){
 	$.ajax({    
     url : 'https://gc31840f0846900-grupo16ciclo3.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/api/costume',
-	data: "{}",
     type : 'GET',
     dataType : 'json',
     contentType: "application/json; charset=utf-8",
@@ -23,7 +22,7 @@ function traerInformacion(){
 		}
         miTabla += '</table>';
 	    $("#resultado").append(miTabla);    
-        pintarSelect();
+       // pintarSelect();
 	},
     error : function(xhr, status) {
         alert('ha sucedido un problema:'+ status);
@@ -33,34 +32,40 @@ function traerInformacion(){
 
 function guardarInformacion(){
     let selected = $("#cat").children(":selected").attr("value");
-	let misDatos = {
-		brand: $("#brand").val(),
-        category_id: selected,
-        id: $("#id").val(),
-        model: $("#model").val(),
-        name: $("#name").val()
-	};
-	let datosJson = JSON.stringify(misDatos); 
-	$.ajax(    
-    'https://gc31840f0846900-grupo16ciclo3.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/api/costume',
-	{data: datosJson,
-    type : 'POST',
-    dataType : 'json',
-    contentType: "application/json; charset=utf-8",
-  
-    statusCode : {
-		201 :  function() {
-			
-			alert("guardado! ");
-			$("#brand").val("");
-			$("#category").val("");
-			$("#id").val("");
-			$("#model").val("");
-			$("#name").val("");
-        	traerInformacion();	
+	if (selected.length > 0) {
+		let misDatos = {
+			brand: $("#brand").val(),
+			category_id: selected,
+			id: $("#id").val(),
+			model: $("#model").val(),
+			name: $("#name").val()
+		};
+		let datosJson = JSON.stringify(misDatos); 
+		$.ajax(    
+		'https://gc31840f0846900-grupo16ciclo3.adb.sa-saopaulo-1.oraclecloudapps.com/ords/admin/api/costume',
+		{data: datosJson,
+		type : 'POST',
+		dataType : 'json',
+		contentType: "application/json; charset=utf-8",
+	  
+		statusCode : {
+			201 :  function() {
+				
+				alert("guardado! ");
+				$("#brand").val("");
+				$("#category").val("");
+				$("#id").val("");
+				$("#model").val("");
+				$("#name").val("");
+				traerInformacion();	
+				}
 			}
-		}
-	});
+		});
+	}
+	else
+	{
+		alert('Debe escoger categoria');
+    }
 }
 
 function editarRegistro (id){
@@ -134,7 +139,7 @@ function pintarSelect(){
     success : function(respuesta) {
 		console.log(respuesta);
 		$("#cat").empty();
-		miSelect="";
+		miSelect='<option id="" ></option>';
 		for (i=0; i<respuesta.items.length; i++){
 	        miSelect += '<option value='+ respuesta.items[i].id+ '>'+respuesta.items[i].nombre_categoria+'</option>'; 		
 		}

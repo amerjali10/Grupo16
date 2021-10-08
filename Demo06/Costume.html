@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
     <meta http-equiv="Content-Type" content="application/json" >
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
     <title>USA - Grupo16 - Ciclo03</title>
 </head>
 <body onLoad="pintarSelect()">
@@ -17,9 +18,12 @@
        <input type="text" id="name" placeholder="name">
        <input type="text" id="brand" placeholder="brand">
        <input type="number" id="model" placeholder="model">
-	   <select id="cat">
-	   </select>
+		<select id="cat"  required>
+		  
+		</select>
+<!--
        <input type="number" id="category" placeholder="category_id">
+-->
    </div>
    <button onclick="guardarInformacion()">Guardar!</button>
    <button onclick="actualizarInformacion()">Actualizar</button>
